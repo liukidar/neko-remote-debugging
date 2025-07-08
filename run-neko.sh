@@ -64,7 +64,7 @@ while [[ $# -gt 0 ]]; do
             shift 2
             ;;
         -i|--image)  # 👈 Add support for custom image name
-            IMAGE_NAME="$2"
+            IMAGE_NAME="neko-$2"
             shift 2
             ;;
         --host-network)
@@ -189,14 +189,6 @@ get_local_ip() {
 # Get local IP for NAT1TO1 configuration
 LOCAL_IP=$(get_local_ip)
 
-# Build and run the Docker command
-echo "Starting Neko with:"
-echo "  Server port: $SERVER_PORT"
-echo "  Debug port: $DEBUG_PORT"
-echo "  Chrome profile: $CHROME_PROFILE_ABS"
-echo "  Local IP: $LOCAL_IP"
-echo ""
-
 # Check if Docker is running
 if ! docker info >/dev/null 2>&1; then
     echo "Error: Docker is not running or not accessible" >&2
@@ -225,6 +217,14 @@ if $FORCE_BUILD || ! docker image inspect "$IMAGE_NAME" >/dev/null 2>&1; then
 
     echo "✅ Successfully built image '$IMAGE_NAME'"
 fi
+
+# Build and run the Docker command
+echo "Starting Neko with:"
+echo "  Server port: $SERVER_PORT"
+echo "  Debug port: $DEBUG_PORT"
+echo "  Chrome profile: $CHROME_PROFILE_ABS"
+echo "  Local IP: $LOCAL_IP"
+echo ""
 
 # Run the Docker container with improved network configuration
 if [ "$USE_HOST_NETWORK" = true ]; then
