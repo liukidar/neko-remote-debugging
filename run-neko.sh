@@ -230,38 +230,13 @@ fi
 if [ "$USE_HOST_NETWORK" = true ]; then
     echo "Using host networking mode for better WebRTC connectivity"
     exec docker run \
-        -v "$CHROME_PROFILE_ABS:/home/neko/chrome-profile" \
-        --shm-size=2gb \
-        --cap-add=SYS_ADMIN \
-        --rm \
-        --network=host \
-        -e "NEKO_DESKTOP_SCREEN=1920x1080@30" \
-        -e "NEKO_MEMBER_MULTIUSER_USER_PASSWORD=neko" \
-        -e "NEKO_MEMBER_MULTIUSER_ADMIN_PASSWORD=admin" \
-        -e "NEKO_WEBRTC_EPR=52000-52100" \
-        -e "NEKO_WEBRTC_ICELITE=1" \
-        -e "NEKO_WEBRTC_NAT1TO1=$LOCAL_IP" \
-        -e "NEKO_WEBRTC_STUN=stun:stun.l.google.com:19302" \
-        -e "NEKO_BIND=0.0.0.0:$SERVER_PORT" \
-        -e "DISPLAY=:$DISPLAY_NUMBER" \
+        -p "$SERVER_PORT:8080" \
+        -p "$DEBUG_PORT:9223" \
         "$IMAGE_NAME"
 else
     echo "Using bridge networking mode with port mapping"
-exec docker run \
-    -p "$SERVER_PORT:8080" \
-    -p "$DEBUG_PORT:9223" \
-        -p "52000-52100:52000-52100/udp" \
-    -v "$CHROME_PROFILE_ABS:/home/neko/chrome-profile" \
-    --shm-size=2gb \
-    --cap-add=SYS_ADMIN \
-    --rm \
-        -e "NEKO_DESKTOP_SCREEN=1920x1080@30" \
-        -e "NEKO_MEMBER_MULTIUSER_USER_PASSWORD=neko" \
-        -e "NEKO_MEMBER_MULTIUSER_ADMIN_PASSWORD=admin" \
-        -e "NEKO_WEBRTC_EPR=52000-52100" \
-        -e "NEKO_WEBRTC_ICELITE=1" \
-        -e "NEKO_WEBRTC_NAT1TO1=$LOCAL_IP" \
-        -e "NEKO_WEBRTC_STUN=stun:stun.l.google.com:19302" \
-        -e "DISPLAY=:$DISPLAY_NUMBER" \
+    exec docker run \
+        -p "$SERVER_PORT:8080" \
+        -p "$DEBUG_PORT:9223" \
         "$IMAGE_NAME"
 fi
