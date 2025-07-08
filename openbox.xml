@@ -15,6 +15,7 @@
     <!-- Match all windows and remove their decorations (obxprop | grep "^_OB_APP") -->
     <application class="Chromium*" name="chromium*" role="browser">
       <decor>no</decor>
+      <fullscreen>yes</fullscreen>
       <maximized>true</maximized>
       <focus>yes</focus>
       <layer>normal</layer>
