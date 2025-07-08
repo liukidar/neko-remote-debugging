@@ -2,7 +2,7 @@
 
 🎯 This repository provides a pre-configured setup for running [Neko](https://github.com/m1k1o/neko) with Chrome remote debugging enabled and external DevTools access.
 
-It is based on [this amazing configuration](https://github.com/m1k1o/neko/issues/391#issuecomment-3016080496) by @<Nefaris>.
+It is based on [this amazing configuration](https://github.com/m1k1o/neko/issues/391#issuecomment-3016080496) by @Nefaris.
 
 ## 🚀 Quick Start
 
