@@ -348,6 +348,7 @@ run_neko_container() {
         run
         -p "$SERVER_PORT:8080"
         -p "$DEBUG_PORT:9223"
+        -e "NEKO_NAT1TO1=$local_ip"
         -e "NEKO_WEBRTC_NAT1TO1=$local_ip"
         -e "NEKO_CHROME_FLAGS=$chrome_flags"
     )
