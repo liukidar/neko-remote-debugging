@@ -41,7 +41,16 @@ print_error() {
 
 # Check if running in WSL environment
 is_wsl() {
-    [[ -n "${WSL_DISTRO_NAME:-}" ]] || [[ -f /proc/version ]] && grep -qi "microsoft\|wsl" /proc/version 2>/dev/null
+    # Check /proc/version for Microsoft/WSL signatures (most reliable)
+    ([[ -f /proc/version ]] && grep -qi "microsoft\|wsl" /proc/version 2>/dev/null) || \
+    # Check for WSL environment variable (WSL2 sets this)
+    [[ -n "${WSL_DISTRO_NAME:-}" ]] || \
+    # Check for Windows filesystem in /proc/mounts (drvfs = WSL1, 9p = WSL2)
+    (grep -q "drvfs\|9p" /proc/mounts 2>/dev/null) || \
+    # Check for typical WSL mount structure
+    [[ -d /mnt/c ]] || \
+    # Check for WSL interop (Windows executable access)
+    [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]
 }
 
 # Check if a port is available
