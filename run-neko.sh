@@ -114,6 +114,7 @@ done
 # --clear: Stop and remove all neko-related containers and images
 if [ "$CLEAR" = true ]; then
     echo "🧹 Stopping and removing all Neko-related Docker containers and images..."
+    rm -rf "$DEFAULT_CHROME_PROFILE"
 
     # Find and stop all containers with 'neko' in their image or name
     CONTAINERS=$(docker ps -a --filter "ancestor=neko-debug" --filter "ancestor=neko-debug2" --filter "ancestor=neko" --format "{{.ID}}")
