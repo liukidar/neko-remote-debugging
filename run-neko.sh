@@ -39,9 +39,10 @@ DEFAULT_IMAGE_NAME="neko-debug"  # Default Docker image
 USE_HOST_NETWORK=true  # Default to host network for better WebRTC connectivity
 FORCE_BUILD=false  # Default: don’t rebuild if image exists
 # Assign unique virtual DISPLAY for X server
-DISPLAY_NUMBER=$((100 + RANDOM % 100))
-echo "Using virtual display :$DISPLAY_NUMBER"
+# DISPLAY_NUMBER=$((100 + RANDOM % 100))
+# echo "Using virtual display :$DISPLAY_NUMBER"
 CLEAR=false
+CHROME_FLAGS="--no-sandbox --no-zygote --disable-extensions"
 
 # Parse command line arguments
 SERVER_PORT=""
@@ -232,6 +233,8 @@ if [ "$USE_HOST_NETWORK" = true ]; then
     exec docker run \
         -p "$SERVER_PORT:8080" \
         -p "$DEBUG_PORT:9223" \
+        -e "NEKO_WEBRTC_NAT1TO1=$LOCAL_IP" \
+        -e NEKO_CHROME_FLAGS="$CHROME_FLAGS" \
         "$IMAGE_NAME"
 else
     echo "Using bridge networking mode with port mapping"
