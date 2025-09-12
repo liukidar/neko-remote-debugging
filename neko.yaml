@@ -94,7 +94,6 @@ capture:
           subme: "0"                    # Fastest subpixel motion estimation
           trellis: "0"                  # Disable trellis quantization
           cabac: "false"                # Use CAVLC (faster than CABAC)
-          scenecut: "0"                 # Disable scene cut detection
         show_pointer: false
   audio:
     enabled: false                   # Completely disable audio streaming
