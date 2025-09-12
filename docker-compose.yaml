@@ -25,12 +25,9 @@ services:
         soft: 32768
         hard: 32768
     environment:
-      NEKO_DESKTOP_SCREEN: 1024x768@24
-      NEKO_MEMBER_MULTIUSER_USER_PASSWORD: neko
-      NEKO_MEMBER_MULTIUSER_ADMIN_PASSWORD: admin
-      NEKO_WEBRTC_EPR: 52000-52100
-      NEKO_WEBRTC_ICELITE: 1
       # Low-resource optimizations
       MALLOC_ARENA_MAX: 1
       MALLOC_MMAP_THRESHOLD_: 65536
       MALLOC_TRIM_THRESHOLD_: 131072
+      # Use config file instead of individual environment variables
+      NEKO_CONFIG: "/etc/neko/neko.yaml"

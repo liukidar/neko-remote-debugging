@@ -1,9 +1,21 @@
 ### 📄 **`chromium-remote-debug/README.md`**
 
 ````markdown
-# Chromium Remote Debug
+# Chromium Remote Debug - Minimal Edition
 
-Run Chromium browser inside a Neko container with remote debugging enabled and accessible from a browser. This app is useful for testing, automation, and accessing Chromium DevTools externally.
+Run Chromium browser inside a Neko container with **no login interface** - direct browser access with remote debugging enabled. Optimized for minimal resource usage on low-resource machines.
+
+## 🪶 Ultra-Minimal Features
+
+- **No Login Required**: Direct access to browser view - no Neko interface
+- **No UI Controls**: Clean browser-only experience
+- **Auto-fullscreen**: Automatic fullscreen video display
+- **Ultra-low resource usage**: Optimized for 4GB machines
+- **CPU-only rendering**: No GPU acceleration for better compatibility
+- **Reduced video quality**: 500kbps bitrate, 15fps for minimal bandwidth
+- **Single-threaded encoding**: Minimal CPU impact
+- **Disabled audio**: Audio streaming disabled to save resources
+- **Anonymous access**: No user management or authentication
 
 ---
 
@@ -34,15 +46,19 @@ Run the container with the following command:
 docker run -it --rm \
   -p 8080:8080 \
   -p 9223:9223 \
-  --shm-size=2gb \
+  --shm-size=512mb \
   --cap-add=SYS_ADMIN \
+  --memory=2g \
+  --cpus=1.0 \
   ghcr.io/m1k1o/neko-apps/chromium-remote-debug:latest
 ```
 
 This will:
 
-* Expose the Neko web interface on port `8080`
+* Expose the browser directly on port `8080` (no login required)
 * Expose Chromium DevTools on port `9223`
+* Use minimal resources (2GB RAM, 1 CPU core)
+* Show only the browser - no Neko interface or controls
 
 ---
 
@@ -54,11 +70,25 @@ You can pass additional Chromium flags using the `NEKO_CHROMIUM_FLAGS` environme
 docker run -it --rm \
   -p 8080:8080 \
   -p 9223:9223 \
-  --shm-size=2gb \
+  --shm-size=512mb \
   --cap-add=SYS_ADMIN \
-  -e NEKO_CHROMIUM_FLAGS="--no-sandbox --no-zygote --disable-extensions --window-size=1920,1080" \
+  --memory=2g \
+  --cpus=1.0 \
+  -e NEKO_CHROMIUM_FLAGS="--window-size=800,600 --force-device-scale-factor=0.8" \
   ghcr.io/m1k1o/neko-apps/chromium-remote-debug:latest
 ```
+
+## 🎛️ Video Quality Configuration
+
+The video streaming is configured for ultra-low resource usage:
+
+- **Resolution**: 1024x768
+- **Frame Rate**: 15 FPS  
+- **Bitrate**: 300 kbps
+- **Encoding**: H.264 with ultrafast preset
+- **Threading**: Single-threaded encoding
+
+To modify video settings, edit the `neko.yaml` configuration file before building.
 
 ---
 

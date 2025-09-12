@@ -15,3 +15,4 @@ COPY supervisord.conf /etc/neko/supervisord/chromium.conf
 COPY --chown=neko preferences.json /home/neko/.config/chromium/Default/Preferences
 COPY policies.json /etc/chromium/policies/managed/policies.json
 COPY openbox.xml /etc/neko/openbox.xml
+COPY neko.yaml /etc/neko/neko.yaml

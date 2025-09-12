@@ -1,0 +1,56 @@
+# Neko configuration for lightweight video streaming
+# For detailed configuration options, please refer to the Neko documentation:
+# https://neko.m1k1o.net/docs/v3/configuration#file
+
+desktop:
+  screen: "1024x768@24"  # Reduced from 60fps to 24fps for lower CPU usage
+
+member:
+  provider: anonymous  # Change from multiuser to anonymous (no login required)
+
+session:
+  merciful_reconnect: true
+  implicit_hosting: true
+  auto_login: true     # Auto-login users without showing login screen
+  cookie:
+    enabled: false
+
+webui:
+  enabled: false       # Disable the Neko web interface completely
+
+plugins:
+  enabled: false
+
+chat:
+  enabled: false
+
+filetransfer:
+  enabled: false
+
+ui:
+  hide_controls: true     # Hide all UI controls
+  hide_sidebar: true      # Hide sidebar
+  auto_fullscreen: true   # Auto fullscreen the video
+
+capture:
+  video:
+    codec: h264
+    ids: [ultralight]   # Custom ultralight profile for minimal resources
+    pipelines:
+      ultralight:
+        width: "1024"
+        height: "768"
+        fps: "15"           # Low frame rate for CPU conservation
+        gst_encoder: "x264enc"
+        gst_params:
+          bitrate: "500"             # Very low bitrate (500 kbps)
+          speed-preset: "ultrafast"  # Fastest encoding preset
+          tune: "zerolatency"        # Minimal latency
+          threads: "1"               # Single thread to conserve CPU
+          qp-min: "18"               # Higher quality range start
+          qp-max: "28"               # Lower quality range end
+          ref: "1"                   # Minimal reference frames
+          bframes: "0"               # No B-frames for lower CPU usage
+        show_pointer: false          # Disable cursor for performance
+  audio:
+    enabled: false                   # Disable audio to save resources
