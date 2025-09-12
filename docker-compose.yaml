@@ -15,8 +15,8 @@ services:
     tmpfs:
       # Use smaller tmpfs for cache and temporary files to conserve RAM
       - /tmp:exec,size=512m
-      - /var/tmp:exec,size=128m
-      - /home/neko/.cache:exec,size=128m
+      - /var/tmp:exec,size=256m
+      - /home/neko/.cache:exec,size=256m
     mem_limit: 2g
     memswap_limit: 2g
     cpus: 1.0
@@ -32,14 +32,9 @@ services:
       # Use config file instead of individual environment variables
       NEKO_CONFIG: "/etc/neko/neko.yaml"
       # Force anonymous login and autoplay via environment variables
+      NEKO_PASSWORD: ""
+      NEKO_PASSWORD_ADMIN: ""
       NEKO_MEMBER_PROVIDER: "anonymous"
-      NEKO_SESSION_IMPLICIT_HOSTING: "true"
-      NEKO_SESSION_AUTO_LOGIN: "true" 
-      NEKO_SESSION_AUTO_CONNECT: "true"
-      NEKO_SESSION_AUTO_PLAY: "true"
-      NEKO_WEBRTC_AUTO_PLAY: "true"
-      NEKO_CLIENT_AUTO_PLAY: "true"
-      NEKO_CLIENT_AUTO_CONNECT: "true"
 
 # volumes:
 #   chromium-profile:
