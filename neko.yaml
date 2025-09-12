@@ -67,6 +67,11 @@ capture:
           threads: "1"                 # Single thread
           keyframe-max-dist: "15"      # Keyframe every second at 15fps
           token-partitions: "0"        # Simplest token partitioning
+          end-usage: "cbr"             # Constant bitrate mode for predictable dropping
+          buffer-size: "1000"          # 1 second buffer for rate control
+          buffer-initial-size: "250"   # Start with smaller buffer (250ms)
+          buffer-optimal-size: "500"   # Target buffer level (500ms)
+          max-intra-rate: "300"        # Allow higher bitrate spikes for keyframes
         show_pointer: false
       # Alternative H.264 pipeline with faster connection (uncomment to use)
       # fast_h264:
