@@ -66,7 +66,6 @@ capture:
           max-quantizer: "28"          # Lower max quality (prioritize speed)
           threads: "1"                 # Single thread
           keyframe-max-dist: "15"      # Keyframe every second at 15fps
-          drop-frame: "1"              # Enable frame dropping for stability
           token-partitions: "0"        # Simplest token partitioning
         show_pointer: false
       # Alternative H.264 pipeline with faster connection (uncomment to use)
