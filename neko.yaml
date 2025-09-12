@@ -47,8 +47,8 @@ filetransfer:
 
 capture:
   video:
-    codec: vp8
-    ids: [fast_vp8]
+    codec: h264
+    ids: [fast_h264]
     pipelines:
       # VP8 pipeline - back to working baseline
       fast_vp8:
@@ -72,23 +72,34 @@ capture:
           # buffer-initial-size: "250"   # Start with smaller buffer (250ms)
           # buffer-optimal-size: "500"   # Target buffer level (500ms)
         show_pointer: false
-      # Alternative H.264 pipeline with faster connection (uncomment to use)
-      # fast_h264:
-      #   width: "1024"
-      #   height: "768"
-      #   fps: "15"
-      #   gst_encoder: "x264enc"
-      #   gst_params:
-      #     bitrate: "500"
-      #     speed-preset: "ultrafast"
-      #     tune: "zerolatency"
-      #     threads: "1"
-      #     key-int-max: "15"         # Force keyframe every 15 frames
-      #     intra-refresh: "true"      # Faster initial frame
-      #     rc-lookahead: "0"         # No lookahead for instant start
-      #     ref: "1"
-      #     bframes: "0"
-      #     cabac: "false"            # Faster encoding
-      #   show_pointer: false
+      # Optimized H.264 pipeline for fast connection and low delay
+      fast_h264:
+        width: "1024"
+        height: "768"
+        fps: "15"
+        gst_encoder: "x264enc"
+        gst_params:
+          bitrate: "750"                # Match working VP8 bitrate (750 kbps)
+          speed-preset: "ultrafast"     # Fastest encoding preset
+          tune: "zerolatency"           # Minimize latency
+          threads: "1"                  # Single thread for your CPU
+          key-int-max: "15"             # Keyframe every second (fast recovery)
+          min-keyint: "1"               # Allow keyframes as often as needed
+          keyint: "15"                  # Regular keyframe interval
+          intra-refresh: "true"         # Progressive keyframe delivery
+          rc-lookahead: "0"             # No lookahead buffering
+          sync-lookahead: "0"           # No sync lookahead
+          ref: "1"                      # Single reference frame (fastest)
+          bframes: "0"                  # No B-frames (immediate encoding)
+          weightp: "0"                  # Disable weighted prediction
+          me: "dia"                     # Fastest motion estimation
+          subme: "0"                    # Fastest subpixel motion estimation
+          trellis: "0"                  # Disable trellis quantization
+          aq-mode: "0"                  # Disable adaptive quantization
+          psy: "false"                  # Disable psychovisual optimizations
+          cabac: "false"                # Use CAVLC (faster than CABAC)
+          deblock: "false"              # Disable deblocking filter
+          scenecut: "0"                 # Disable scene cut detection
+        show_pointer: false
   audio:
     enabled: false                   # Completely disable audio streaming
