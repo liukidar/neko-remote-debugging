@@ -58,8 +58,8 @@ capture:
         gst_encoder: "vp8enc"
         gst_params:
           target-bitrate: "1000000"    # Increased to 1 Mbps (was 750k)
-          cpu-used: "10"               # Increased to 10 (was 8)
-          deadline: "66666"            # Back to working 66ms deadline
+          cpu-used: "8"               # Increased to 10 (was 8)
+          deadline: "50000"            # Reduced to 50ms (was 66ms)
           error-resilient: "1"         # Better for packet loss
           lag-in-frames: "0"           # No buffering for instant start
           min-quantizer: "4"           # Back to original min quality
