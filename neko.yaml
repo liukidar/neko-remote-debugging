@@ -79,16 +79,25 @@ capture:
         fps: "15"
         gst_encoder: "x264enc"
         gst_params:
-          bitrate: "500"
+          bitrate: "750"
           speed-preset: "ultrafast"
           tune: "zerolatency"
           threads: "1"
-          key-int-max: "15"         # Force keyframe every 15 frames
-          intra-refresh: "true"      # Faster initial frame
-          rc-lookahead: "0"         # No lookahead for instant start
-          ref: "1"
-          bframes: "0"
-          cabac: "false"            # Faster encoding
+          qp-min: "18"               # Higher quality range start
+          qp-max: "28"               # Lower quality range end
+          ref: "1"                   # Minimal reference frames
+          bframes: "0"  
+        # gst_params:
+        #   bitrate: "500"
+        #   speed-preset: "ultrafast"
+        #   tune: "zerolatency"
+        #   threads: "1"
+        #   key-int-max: "15"         # Force keyframe every 15 frames
+        #   intra-refresh: "true"      # Faster initial frame
+        #   rc-lookahead: "0"         # No lookahead for instant start
+        #   ref: "1"
+        #   bframes: "0"
+        #   cabac: "false"            # Faster encoding
         show_pointer: false
   audio:
     enabled: false                   # Completely disable audio streaming
