@@ -57,15 +57,17 @@ capture:
         fps: "15"
         gst_encoder: "vp8enc"
         gst_params:
-          target-bitrate: "750000"    # Increased to 1 Mbps (was 750k)
-          cpu-used: "10"               # Increased to 10 (was 8)
-          deadline: "50000"            # Reduced to 50ms (was 66ms)
+          target-bitrate: "750000"     # Keep working 750k bitrate
+          cpu-used: "14"               # Push encoding speed further (was 10)
+          deadline: "40000"            # More aggressive 40ms deadline (was 60ms)
           error-resilient: "1"         # Better for packet loss
           lag-in-frames: "0"           # No buffering for instant start
-          min-quantizer: "4"           # Back to original min quality
-          max-quantizer: "32"          # Back to original max quality
+          min-quantizer: "6"           # Higher min quality (less CPU on low quality)
+          max-quantizer: "28"          # Lower max quality (prioritize speed)
           threads: "1"                 # Single thread
           keyframe-max-dist: "15"      # Keyframe every second at 15fps
+          drop-frame: "1"              # Enable frame dropping for stability
+          token-partitions: "0"        # Simplest token partitioning
         show_pointer: false
       # Alternative H.264 pipeline with faster connection (uncomment to use)
       # fast_h264:
