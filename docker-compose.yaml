@@ -31,6 +31,15 @@ services:
       MALLOC_TRIM_THRESHOLD_: 131072
       # Use config file instead of individual environment variables
       NEKO_CONFIG: "/etc/neko/neko.yaml"
+      # Force anonymous login and autoplay via environment variables
+      NEKO_MEMBER_PROVIDER: "anonymous"
+      NEKO_SESSION_IMPLICIT_HOSTING: "true"
+      NEKO_SESSION_AUTO_LOGIN: "true" 
+      NEKO_SESSION_AUTO_CONNECT: "true"
+      NEKO_SESSION_AUTO_PLAY: "true"
+      NEKO_WEBRTC_AUTO_PLAY: "true"
+      NEKO_CLIENT_AUTO_PLAY: "true"
+      NEKO_CLIENT_AUTO_CONNECT: "true"
 
 # volumes:
 #   chromium-profile:
