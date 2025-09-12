@@ -94,7 +94,6 @@ capture:
           subme: "0"                    # Fastest subpixel motion estimation
           trellis: "0"                  # Disable trellis quantization
           aq-mode: "0"                  # Disable adaptive quantization
-          psy: "false"                  # Disable psychovisual optimizations
           cabac: "false"                # Use CAVLC (faster than CABAC)
           deblock: "false"              # Disable deblocking filter
           scenecut: "0"                 # Disable scene cut detection
