@@ -3,75 +3,71 @@
 # https://neko.m1k1o.net/docs/v3/configuration#file
 
 desktop:
-  screen: "1024x768@24"  # Reduced from 60fps to 24fps for lower CPU usage
+  screen: "1024x768@15"
 
 member:
-  provider: anonymous  # Change from multiuser to anonymous (no login required)
+  provider: multiuser
+  multiuser:
+    # Single user mode — no login prompt
+    admin_password: ""   # Empty means no password
+    admin_profile:
+      name: ""
+      is_admin: true
+      can_login: true
+      can_connect: true
+      can_watch: true
+      can_host: true
+      can_share_media: false
+      can_access_clipboard: false
+      sends_inactive_cursor: false
+      can_see_inactive_cursors: false
+    user_password: ""
+    user_profile:
+      name: ""
+      is_admin: false
+      can_login: true
+      can_connect: true
+      can_watch: true
+      can_host: false
+      can_share_media: false
+      can_access_clipboard: false
+      sends_inactive_cursor: false
+      can_see_inactive_cursors: false
 
 session:
   merciful_reconnect: true
-  implicit_hosting: true
-  auto_login: true     # Auto-login users without showing login screen
-  auto_connect: true   # Auto-connect to session
-  auto_play: true      # Auto-play video stream
+  implicit_hosting: true   # Auto‑host without UI interaction
   cookie:
     enabled: false
-
-webrtc:
-  audio: false                       # Disable WebRTC audio completely
 
 plugins:
   enabled: false
 
 chat:
-  enabled: false
+  enabled: false            # No chat panel
 
 filetransfer:
-  enabled: false
-
-ui:
-  hide_controls: true     # Hide all UI controls
-  hide_sidebar: true      # Hide sidebar
-  auto_fullscreen: true   # Auto fullscreen the video
-  hide_header: true       # Hide header
-  hide_footer: true       # Hide footer
-  minimal: true           # Minimal UI mode
-  kiosk: true             # Kiosk mode
-
-# Settings for automatic connection and fullscreen
-settings:
-  auto_connect: true
-  auto_fullscreen: true
-  hide_cursors: true
-
-# Client-side interface settings
-client:
-  hide_cursor: true
-  auto_play: true
-  auto_mute: true
+  enabled: false            # No file transfer UI
 
 capture:
   video:
     codec: h264
-    ids: [ultralight]   # Custom ultralight profile for minimal resources
+    ids: [light]
     pipelines:
-      ultralight:
+      light:
         width: "1024"
         height: "768"
-        fps: "15"           # Low frame rate for CPU conservation
+        fps: "15"
         gst_encoder: "x264enc"
         gst_params:
-          bitrate: "500"             # Very low bitrate (500 kbps)
-          speed-preset: "ultrafast"  # Fastest encoding preset
-          tune: "zerolatency"        # Minimal latency
-          threads: "1"               # Single thread to conserve CPU
+          bitrate: "500"
+          speed-preset: "ultrafast"
+          tune: "zerolatency"
+          threads: "1"
           qp-min: "18"               # Higher quality range start
           qp-max: "28"               # Lower quality range end
           ref: "1"                   # Minimal reference frames
-          bframes: "0"               # No B-frames for lower CPU usage
-        show_pointer: false          # Disable cursor for performance
+          bframes: "0"       
+        show_pointer: false
   audio:
     enabled: false                   # Completely disable audio streaming
-    codec: ""                        # No audio codec
-    bitrate: 0                       # Zero audio bitrate
-    channels: 0                      # No audio channels
