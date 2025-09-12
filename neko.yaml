@@ -47,28 +47,29 @@ filetransfer:
 
 capture:
   video:
-    codec: h264
-    ids: [fast_h264]
+    codec: vp8
+    ids: [stable_vp8]
     pipelines:
-      # Ultra-low latency VP8 pipeline - minimize delay
-      ultra_low_latency:
+      # Stable VP8 pipeline - works reliably at 15fps
+      stable_vp8:
         width: "1024"
         height: "768"
-        fps: "15"                    # Higher FPS for smoother, lower perceived latency
+        fps: "15"
         gst_encoder: "vp8enc"
         gst_params:
-          target-bitrate: "1000000"  # 1 Mbps for high bandwidth network
-          cpu-used: "16"             # Maximum speed (sacrifices quality for speed)
-          deadline: "1"              # Real-time deadline (1ms)
-          lag-in-frames: "0"         # Zero buffering
+          target-bitrate: "1000000"  # 1 Mbps
+          cpu-used: "8"              # Fast but stable (not maximum)
+          deadline: "1000000"        # 1 second deadline (more stable)
+          lag-in-frames: "0"         # No buffering
           error-resilient: "1"       # Better for packet loss
-          min-quantizer: "10"        # Higher min quality
-          max-quantizer: "25"        # Lower max quality for consistency
+          min-quantizer: "4"         # Lower min quality (more stable)
+          max-quantizer: "32"        # Higher max quality range
           threads: "1"               # Single thread
-          keyframe-max-dist: "15"    # Keyframe every second at 30fps
-          token-partitions: "0"      # Fastest token partitioning
-          static-thresh: "0"         # No static detection
-          drop-frame: "0"            # Never drop frames
+          keyframe-max-dist: "15"    # Keyframe every second at 15fps
+          token-partitions: "0"      # Simple partitioning
+          static-thresh: "1"         # Default static detection
+          undershoot: "25"           # Allow 25% undershoot
+          overshoot: "25"            # Allow 25% overshoot
         show_pointer: false
       # Fixed H.264 pipeline - no black screen
       fast_h264:
