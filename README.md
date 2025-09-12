@@ -10,8 +10,11 @@ Run Chromium browser inside a Neko container with **no login interface** - direc
 - **No Login Required**: Direct access to browser view - no Neko interface
 - **No UI Controls**: Clean browser-only experience
 - **Auto-fullscreen**: Automatic fullscreen video display
+- **No GPU Required**: Comprehensive CPU-only rendering for GPU-less machines
 - **Ultra-low resource usage**: Optimized for 4GB machines
-- **CPU-only rendering**: No GPU acceleration for better compatibility
+- **CPU-only rendering**: All GPU acceleration completely disabled
+- **No Video Autoplay**: Videos require user interaction to play
+- **No Media Preloading**: Videos/audio don't preload, saving bandwidth
 - **Reduced video quality**: 500kbps bitrate, 15fps for minimal bandwidth
 - **Single-threaded encoding**: Minimal CPU impact
 - **Disabled audio**: Audio streaming disabled to save resources

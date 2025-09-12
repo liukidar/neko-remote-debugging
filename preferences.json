@@ -14,6 +14,9 @@
   "hardware_acceleration_mode": {
     "enabled": false
   },
+  "gpu": {
+    "disabled": true
+  },
   "plugins": {
     "always_open_pdf_externally": true,
     "plugins_list": [],
@@ -36,9 +39,18 @@
     "background_sync_enabled": false,
     "prefetch_enabled": false
   },
+  "media_router": {
+    "enabled": false
+  },
+  "media_engagement": {
+    "enabled": false
+  },
   "media": {
     "device_id_salt": "",
-    "storage_id_salt": ""
+    "storage_id_salt": "",
+    "autoplay_policy": 2,
+    "video_preload": 0,
+    "audio_preload": 0
   },
   "autofill": {
     "enabled": false
@@ -91,7 +103,11 @@
       "notifications": 2,
       "images": 1,
       "javascript": 1,
-      "plugins": 2
+      "plugins": 2,
+      "webgl": 2,
+      "webgl2": 2,
+      "sound": 2,
+      "autoplay": 2
     },
     "name": "neko",
     "using_default_avatar": false,
