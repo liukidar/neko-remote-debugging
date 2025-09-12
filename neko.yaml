@@ -59,7 +59,7 @@ capture:
         gst_params:
           target-bitrate: "750000"     # Keep working 750k bitrate
           cpu-used: "14"               # Push encoding speed further (was 10)
-          deadline: "40000"            # More aggressive 40ms deadline (was 60ms)
+          deadline: "50000"            # More aggressive 50ms deadline (was 50ms)
           error-resilient: "1"         # Better for packet loss
           lag-in-frames: "0"           # No buffering for instant start
           min-quantizer: "6"           # Higher min quality (less CPU on low quality)
@@ -67,10 +67,10 @@ capture:
           threads: "1"                 # Single thread
           keyframe-max-dist: "15"      # Keyframe every second at 15fps
           token-partitions: "0"        # Simplest token partitioning
-          end-usage: "cbr"             # Constant bitrate mode for predictable dropping
-          buffer-size: "1000"          # 1 second buffer for rate control
-          buffer-initial-size: "250"   # Start with smaller buffer (250ms)
-          buffer-optimal-size: "500"   # Target buffer level (500ms)
+          # end-usage: "cbr"             # Constant bitrate mode for predictable dropping
+          # buffer-size: "1000"          # 1 second buffer for rate control
+          # buffer-initial-size: "250"   # Start with smaller buffer (250ms)
+          # buffer-optimal-size: "500"   # Target buffer level (500ms)
         show_pointer: false
       # Alternative H.264 pipeline with faster connection (uncomment to use)
       # fast_h264:
