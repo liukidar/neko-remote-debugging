@@ -50,22 +50,27 @@ capture:
     codec: vp8
     ids: [fast_vp8]
     pipelines:
-      # VP8 pipeline - faster connection, good for high bandwidth/low CPU
+      # VP8 pipeline - optimized for low delay at 15fps
       fast_vp8:
         width: "1024"
         height: "768"
         fps: "15"
         gst_encoder: "vp8enc"
         gst_params:
-          target-bitrate: "500000"    # 500 kbps in bits
-          cpu-used: "8"               # Fastest encoding (0-16, higher = faster)
-          deadline: "1"               # Real-time deadline
-          error-resilient: "1"        # Better for packet loss
-          lag-in-frames: "0"          # No buffering for instant start
-          min-quantizer: "4"          # Min quality
-          max-quantizer: "32"         # Max quality (lower = better)
-          threads: "1"                # Single thread
-          keyframe-max-dist: "15"     # Key frame every 15 frames (1 second)
+          target-bitrate: "1000000"    # 1 Mbps for your high bandwidth
+          cpu-used: "8"                # Fast encoding
+          deadline: "33333"            # ~30ms deadline (1/30 second in microseconds)
+          error-resilient: "1"         # Better for packet loss
+          lag-in-frames: "0"           # No buffering for instant start
+          min-quantizer: "4"           # Min quality
+          max-quantizer: "28"          # Slightly tighter quality range
+          threads: "1"                 # Single thread
+          keyframe-max-dist: "15"      # Keyframe every second at 15fps
+          token-partitions: "0"        # Simple partitioning for speed
+          static-thresh: "1"           # Minimal static detection
+          buffer-size: "1000"          # 1 second buffer size
+          buffer-initial-size: "500"   # Start with half buffer
+          buffer-optimal-size: "600"   # Optimal buffer level
         show_pointer: false
       # Alternative H.264 pipeline with faster connection (uncomment to use)
       # fast_h264:
