@@ -50,26 +50,22 @@ capture:
     codec: vp8
     ids: [fast_vp8]
     pipelines:
-      # VP8 pipeline - pushing further for lower delay
+      # VP8 pipeline - back to working baseline
       fast_vp8:
         width: "1024"
         height: "768"
         fps: "15"
         gst_encoder: "vp8enc"
         gst_params:
-          target-bitrate: "1500000"    # 1.5 Mbps - use that infinite bandwidth!
-          cpu-used: "12"               # Push encoding speed further (was 8)
-          deadline: "50000"            # 50ms deadline (was 66ms)
+          target-bitrate: "1000000"    # Increased to 1 Mbps (was 750k)
+          cpu-used: "10"               # Increased to 10 (was 8)
+          deadline: "50000"            # Reduced to 50ms (was 66ms)
           error-resilient: "1"         # Better for packet loss
           lag-in-frames: "0"           # No buffering for instant start
-          min-quantizer: "8"           # Higher min quality (less CPU on low quality)
-          max-quantizer: "24"          # Lower max quality (prioritize speed)
+          min-quantizer: "4"           # Back to original min quality
+          max-quantizer: "32"          # Back to original max quality
           threads: "1"                 # Single thread
           keyframe-max-dist: "15"      # Keyframe every second at 15fps
-          resize-allowed: "0"          # Disable dynamic resizing
-          dropframe-thresh: "25"       # Drop frames if 25% over target bitrate
-          overshoot-pct: "15"          # Allow 15% bitrate overshoot before dropping
-          undershoot-pct: "25"         # Allow 25% bitrate undershoot
         show_pointer: false
       # Alternative H.264 pipeline with faster connection (uncomment to use)
       # fast_h264:
