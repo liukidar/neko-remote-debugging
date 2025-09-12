@@ -83,8 +83,7 @@ capture:
           speed-preset: "ultrafast"     # Fastest encoding preset
           tune: "zerolatency"           # Minimize latency
           threads: "1"                  # Single thread for your CPU
-          key-int-max: "15"             # Keyframe every second (fast recovery)
-          min-keyint: "1"               # Allow keyframes as often as needed
+          key-int-max: "15"             # Keyframe every second
           keyint: "15"                  # Regular keyframe interval
           intra-refresh: "true"         # Progressive keyframe delivery
           rc-lookahead: "0"             # No lookahead buffering
