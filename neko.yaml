@@ -91,7 +91,6 @@ capture:
           sync-lookahead: "0"           # No sync lookahead
           ref: "1"                      # Single reference frame (fastest)
           bframes: "0"                  # No B-frames (immediate encoding)
-          weightp: "0"                  # Disable weighted prediction
           me: "dia"                     # Fastest motion estimation
           subme: "0"                    # Fastest subpixel motion estimation
           trellis: "0"                  # Disable trellis quantization
