@@ -47,8 +47,8 @@ filetransfer:
 
 capture:
   video:
-    codec: vp8
-    ids: [ultra_low_latency]
+    codec: h264
+    ids: [fast_h264]
     pipelines:
       # Ultra-low latency VP8 pipeline - minimize delay
       ultra_low_latency:
