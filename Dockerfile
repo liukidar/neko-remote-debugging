@@ -16,3 +16,8 @@ COPY --chown=neko preferences.json /home/neko/.config/chromium/Default/Preferenc
 COPY policies.json /etc/chromium/policies/managed/policies.json
 COPY openbox.xml /etc/neko/openbox.xml
 COPY neko.yaml /etc/neko/neko.yaml
+
+# Create chromium profile directory with correct permissions
+RUN mkdir -p /home/neko/chromium-profile && \
+    chown -R neko:neko /home/neko/chromium-profile && \
+    chmod -R 755 /home/neko/chromium-profile
