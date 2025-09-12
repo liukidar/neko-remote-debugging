@@ -47,8 +47,8 @@ filetransfer:
 
 capture:
   video:
-    codec: h264
-    ids: [fast_h264]
+    codec: vp8
+    ids: [fast_vp8]
     pipelines:
       # VP8 pipeline - back to working baseline
       fast_vp8:
