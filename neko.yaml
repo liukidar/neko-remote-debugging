@@ -6,33 +6,7 @@ desktop:
   screen: "1024x768@15"
 
 member:
-  provider: multiuser
-  multiuser:
-    # Single user mode — no login prompt
-    admin_password: ""   # Empty means no password
-    admin_profile:
-      name: ""
-      is_admin: true
-      can_login: true
-      can_connect: true
-      can_watch: true
-      can_host: true
-      can_share_media: false
-      can_access_clipboard: false
-      sends_inactive_cursor: false
-      can_see_inactive_cursors: false
-    user_password: ""
-    user_profile:
-      name: ""
-      is_admin: false
-      can_login: true
-      can_connect: true
-      can_watch: true
-      can_host: false
-      can_share_media: false
-      can_access_clipboard: false
-      sends_inactive_cursor: false
-      can_see_inactive_cursors: false
+  provider: anonymous
 
 session:
   merciful_reconnect: true
