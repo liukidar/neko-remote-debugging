@@ -9,12 +9,12 @@ services:
       - '8080:8080'
       - '9223:9223'                    # Socat proxy for external DevTools access
       - '52000-52100:52000-52100/udp'
-    volumes:
+    # volumes:
       # Persistent browser profile storage (custom location)
-      - "chromium-profile:/home/neko/chromium-profile"
+      # - "chromium-profile:/tmp/chromium-profile"
     tmpfs:
       # Use smaller tmpfs for cache and temporary files to conserve RAM
-      - /tmp:exec,size=256m
+      - /tmp:exec,size=512m
       - /var/tmp:exec,size=128m
       - /home/neko/.cache:exec,size=128m
     mem_limit: 2g
@@ -32,5 +32,5 @@ services:
       # Use config file instead of individual environment variables
       NEKO_CONFIG: "/etc/neko/neko.yaml"
 
-volumes:
-  chromium-profile:
+# volumes:
+#   chromium-profile:
