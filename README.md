@@ -1,9 +1,9 @@
-### 📄 **`chrome-remote-debug/README.md`**
+### 📄 **`chromium-remote-debug/README.md`**
 
 ````markdown
-# Chrome Remote Debug
+# Chromium Remote Debug
 
-Run Google Chrome inside a Neko container with remote debugging enabled and accessible from a browser. This app is useful for testing, automation, and accessing Chrome DevTools externally.
+Run Chromium browser inside a Neko container with remote debugging enabled and accessible from a browser. This app is useful for testing, automation, and accessing Chromium DevTools externally.
 
 ---
 
@@ -15,13 +15,13 @@ Clone the `neko-apps` repository and build the image:
 git clone https://github.com/m1k1o/neko-apps.git
 cd neko-apps
 
-./build --application chrome-remote-debug --base_image ghcr.io/m1k1o/neko/base:latest
+./build --application chromium-remote-debug --base_image ghcr.io/m1k1o/neko/base:latest
 ````
 
 The image will be tagged as:
 
 ```
-ghcr.io/m1k1o/neko-apps/chrome-remote-debug:latest
+ghcr.io/m1k1o/neko-apps/chromium-remote-debug:latest
 ```
 
 ---
@@ -36,19 +36,19 @@ docker run -it --rm \
   -p 9223:9223 \
   --shm-size=2gb \
   --cap-add=SYS_ADMIN \
-  ghcr.io/m1k1o/neko-apps/chrome-remote-debug:latest
+  ghcr.io/m1k1o/neko-apps/chromium-remote-debug:latest
 ```
 
 This will:
 
 * Expose the Neko web interface on port `8080`
-* Expose Chrome DevTools on port `9223`
+* Expose Chromium DevTools on port `9223`
 
 ---
 
-## ⚙️ Add Custom Chrome Flags
+## ⚙️ Add Custom Chromium Flags
 
-You can pass additional Chrome flags using the `NEKO_CHROME_FLAGS` environment variable. Example:
+You can pass additional Chromium flags using the `NEKO_CHROMIUM_FLAGS` environment variable. Example:
 
 ```bash
 docker run -it --rm \
@@ -56,8 +56,8 @@ docker run -it --rm \
   -p 9223:9223 \
   --shm-size=2gb \
   --cap-add=SYS_ADMIN \
-  -e NEKO_CHROME_FLAGS="--no-sandbox --no-zygote --disable-extensions --window-size=1920,1080" \
-  ghcr.io/m1k1o/neko-apps/chrome-remote-debug:latest
+  -e NEKO_CHROMIUM_FLAGS="--no-sandbox --no-zygote --disable-extensions --window-size=1920,1080" \
+  ghcr.io/m1k1o/neko-apps/chromium-remote-debug:latest
 ```
 
 ---

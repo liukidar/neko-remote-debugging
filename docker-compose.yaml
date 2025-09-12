@@ -1,8 +1,8 @@
 services:
   neko:
-    image: 'ghcr.io/m1k1o/neko/google-chrome'
+    image: 'ghcr.io/m1k1o/neko/chromium'
     restart: unless-stopped
-    shm_size: 2gb
+    shm_size: 512mb
     cap_add:
       - SYS_ADMIN
     ports:
@@ -11,10 +11,26 @@ services:
       - '52000-52100:52000-52100/udp'
     volumes:
       # Persistent browser profile storage (custom location)
-      - "./chrome-profile:/home/neko/chrome-profile"
+      - "./chromium-profile:/home/neko/chromium-profile"
+    tmpfs:
+      # Use smaller tmpfs for cache and temporary files to conserve RAM
+      - /tmp:exec,size=256m
+      - /var/tmp:exec,size=128m
+      - /home/neko/.cache:exec,size=128m
+    mem_limit: 2g
+    memswap_limit: 2g
+    cpus: 1.0
+    ulimits:
+      nofile:
+        soft: 32768
+        hard: 32768
     environment:
-      NEKO_DESKTOP_SCREEN: 1366x768@30
+      NEKO_DESKTOP_SCREEN: 1024x768@24
       NEKO_MEMBER_MULTIUSER_USER_PASSWORD: neko
       NEKO_MEMBER_MULTIUSER_ADMIN_PASSWORD: admin
       NEKO_WEBRTC_EPR: 52000-52100
       NEKO_WEBRTC_ICELITE: 1
+      # Low-resource optimizations
+      MALLOC_ARENA_MAX: 1
+      MALLOC_MMAP_THRESHOLD_: 65536
+      MALLOC_TRIM_THRESHOLD_: 131072

@@ -1,65 +1,61 @@
 {
-  "homepage": "http://www.google.com",
+  "homepage": "about:blank",
   "homepage_is_newtabpage": false,
   "first_run_tabs": [
-    "https://www.google.com/_/chrome/newtab?ie=UTF-8"
+    "about:blank"
   ],
+  "performance": {
+    "enable_background_mode": false,
+    "background_mode_enabled": false
+  },
+  "background_mode": {
+    "enabled": false
+  },
+  "hardware_acceleration_mode": {
+    "enabled": false
+  },
+  "plugins": {
+    "always_open_pdf_externally": true,
+    "plugins_list": [],
+    "enabled": false
+  },
+  "net": {
+    "network_prediction_options": 2,
+    "prerender": 0
+  },
+  "safebrowsing": {
+    "enabled": false,
+    "enhanced": false,
+    "reporting_enabled": false
+  },
+  "search": {
+    "suggest_enabled": false,
+    "instant_enabled": false
+  },
+  "privacy": {
+    "background_sync_enabled": false,
+    "prefetch_enabled": false
+  },
+  "media": {
+    "device_id_salt": "",
+    "storage_id_salt": ""
+  },
+  "autofill": {
+    "enabled": false
+  },
+  "password_manager": {
+    "enabled": false
+  },
+  "sync": {
+    "suppress_start": true
+  },
   "custom_links": {
     "initialized": true,
-    "list": [
-      {
-        "title": "YouTube",
-        "url": "https://www.youtube.com/"
-      },
-      {
-        "title": "Netflix",
-        "url": "https://netflix.com"
-      },
-      {
-        "title": "Hulu",
-        "url": "https://www.hulu.com/"
-      },
-      {
-        "title": "9Anime",
-        "url": "https://9anime.to/"
-      },
-      {
-        "title": "Crunchy Roll",
-        "url": "https://www.crunchyroll.com/"
-      },
-      {
-        "title": "Funimation",
-        "url": "https://www.funimation.com/"
-      },
-      {
-        "title": "Disney+",
-        "url": "https://www.disneyplus.com/"
-      },
-      {
-        "title": "HBO Now",
-        "url": "https://play.hbonow.com/"
-      },
-      {
-        "title": "Amazon Video",
-        "url": "https://www.amazon.com/Amazon-Video/b?node=2858778011"
-      },
-      {
-        "title": "VRV",
-        "url": "https://vrv.co/"
-      },
-      {
-        "title": "Twitch",
-        "url": "https://www.twitch.tv/"
-      },
-      {
-        "title": "Mixer",
-        "url": "https://mixer.com/"
-      }
-    ]
+    "list": []
   },
   "browser": {
     "custom_chrome_frame": false,
-    "show_home_button": true,
+    "show_home_button": false,
     "window_placement": {
       "maximized": true
     }
@@ -71,24 +67,18 @@
     "show_on_first_run_allowed": false
   },
   "distribution": {
-    "import_bookmarks_from_file": "bookmarks.html",
-    "import_bookmarks": true,
-    "import_history": true,
-    "import_home_page": true,
-    "import_search_engine": true,
     "ping_delay": 60,
     "do_not_create_desktop_shortcut": true,
     "do_not_create_quick_launch_shortcut": true,
     "do_not_create_taskbar_shortcut": true,
     "do_not_launch_chrome": true,
     "do_not_register_for_update_launch": true,
-    "make_chrome_default": true,
-    "make_chrome_default_for_user": true,
     "system_level": false,
     "verbose_logging": false
   },
   "profile": {
     "avatar_index": 19,
+    "background_apps": false,
     "default_content_setting_values": {
       "clipboard": 2,
       "cookies": 4,
@@ -97,7 +87,11 @@
       "media_stream_mic": 2,
       "midi_sysex": 2,
       "payment_handler": 2,
-      "usb_guard": 2
+      "usb_guard": 2,
+      "notifications": 2,
+      "images": 1,
+      "javascript": 1,
+      "plugins": 2
     },
     "name": "neko",
     "using_default_avatar": false,
