@@ -79,20 +79,16 @@ capture:
         fps: "15"
         gst_encoder: "x264enc"
         gst_params:
-          bitrate: "750"                # Match working VP8 bitrate (750 kbps)
-          speed-preset: "ultrafast"     # Fastest encoding preset
-          tune: "zerolatency"           # Minimize latency
-          threads: "1"                  # Single thread for your CPU
-          key-int-max: "15"             # Keyframe every second
-          intra-refresh: "true"         # Progressive keyframe delivery
-          rc-lookahead: "0"             # No lookahead buffering
-          sync-lookahead: "0"           # No sync lookahead
-          ref: "1"                      # Single reference frame (fastest)
-          bframes: "0"                  # No B-frames (immediate encoding)
-          me: "dia"                     # Fastest motion estimation
-          subme: "0"                    # Fastest subpixel motion estimation
-          trellis: "0"                  # Disable trellis quantization
-          cabac: "false"                # Use CAVLC (faster than CABAC)
+          bitrate: "500"
+          speed-preset: "ultrafast"
+          tune: "zerolatency"
+          threads: "1"
+          key-int-max: "15"         # Force keyframe every 15 frames
+          intra-refresh: "true"      # Faster initial frame
+          rc-lookahead: "0"         # No lookahead for instant start
+          ref: "1"
+          bframes: "0"
+          cabac: "false"            # Faster encoding
         show_pointer: false
   audio:
     enabled: false                   # Completely disable audio streaming
