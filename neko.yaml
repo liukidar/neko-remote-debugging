@@ -7,12 +7,34 @@ desktop:
 
 member:
   provider: anonymous
+  anonymous:
+    # Allow anyone to connect with full permissions
+    can_login: true
+    can_connect: true
+    can_watch: true
+    can_host: true
+    can_share_media: true
+    can_access_clipboard: true
+    sends_inactive_cursor: false
+    can_see_inactive_cursors: false
 
 session:
   merciful_reconnect: true
   implicit_hosting: true   # Auto‑host without UI interaction
+  auto_login: true         # Automatically log in users
+  auto_connect: true       # Automatically connect to the stream
+  auto_play: true          # Automatically start video playback
   cookie:
     enabled: false
+
+# Add webrtc section for autoplay
+webrtc:
+  auto_play: true          # Force WebRTC autoplay
+  
+# Add client settings for autoplay
+client:
+  auto_play: true          # Client-side autoplay
+  auto_connect: true       # Client auto-connect
 
 plugins:
   enabled: false
