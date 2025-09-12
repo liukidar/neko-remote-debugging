@@ -47,43 +47,53 @@ filetransfer:
 
 capture:
   video:
-    codec: h264
-    ids: [fast_h264]
+    codec: vp8
+    ids: [ultra_low_latency]
     pipelines:
-      # VP8 pipeline - faster connection, good for high bandwidth/low CPU
-      # fast_vp8:
-      #   width: "1024"
-      #   height: "768"
-      #   fps: "15"
-      #   gst_encoder: "vp8enc"
-      #   gst_params:
-      #     target-bitrate: "500000"    # 500 kbps in bits
-      #     cpu-used: "8"               # Fastest encoding (0-16, higher = faster)
-      #     deadline: "1"               # Real-time deadline
-      #     error-resilient: "1"        # Better for packet loss
-      #     lag-in-frames: "0"          # No buffering for instant start
-      #     min-quantizer: "4"          # Min quality
-      #     max-quantizer: "32"         # Max quality (lower = better)
-      #     threads: "1"                # Single thread
-      #     keyframe-max-dist: "15"     # Key frame every 15 frames (1 second)
-      #   show_pointer: false
-      # Alternative H.264 pipeline with faster connection (uncomment to use)
+      # Ultra-low latency VP8 pipeline - minimize delay
+      ultra_low_latency:
+        width: "1024"
+        height: "768"
+        fps: "15"                    # Higher FPS for smoother, lower perceived latency
+        gst_encoder: "vp8enc"
+        gst_params:
+          target-bitrate: "1000000"  # 1 Mbps for high bandwidth network
+          cpu-used: "16"             # Maximum speed (sacrifices quality for speed)
+          deadline: "1"              # Real-time deadline (1ms)
+          lag-in-frames: "0"         # Zero buffering
+          error-resilient: "1"       # Better for packet loss
+          min-quantizer: "10"        # Higher min quality
+          max-quantizer: "25"        # Lower max quality for consistency
+          threads: "1"               # Single thread
+          keyframe-max-dist: "15"    # Keyframe every second at 30fps
+          token-partitions: "0"      # Fastest token partitioning
+          static-thresh: "0"         # No static detection
+          drop-frame: "0"            # Never drop frames
+        show_pointer: false
+      # Fixed H.264 pipeline - no black screen
       fast_h264:
         width: "1024"
         height: "768"
         fps: "15"
         gst_encoder: "x264enc"
         gst_params:
-          bitrate: "500"
+          bitrate: "1000"            # 1000 kbps
           speed-preset: "ultrafast"
           tune: "zerolatency"
           threads: "1"
-          key-int-max: "15"         # Force keyframe every 15 frames
-          intra-refresh: "true"      # Faster initial frame
-          rc-lookahead: "0"         # No lookahead for instant start
-          ref: "1"
-          bframes: "0"
-          cabac: "false"            # Faster encoding
+          key-int-max: "15"          # Keyframe every second
+          sliced-threads: "false"    # Disable for compatibility
+          sync-lookahead: "0"        # No lookahead
+          rc-lookahead: "0"          # No rate control lookahead
+          ref: "1"                   # Single reference frame
+          bframes: "0"               # No B-frames
+          weightb: "false"           # Disable weighted B-frames
+          weightp: "0"               # Disable weighted P-frames
+          me: "dia"                  # Fastest motion estimation
+          subme: "0"                 # Fastest subpixel motion estimation
+          trellis: "0"               # Disable trellis quantization
+          aq-mode: "0"               # Disable adaptive quantization
+          psy: "false"               # Disable psychovisual optimizations
         show_pointer: false
   audio:
     enabled: false                   # Completely disable audio streaming
