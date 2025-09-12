@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser View</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            overflow: hidden;
+        }
+        
+        #neko {
+            width: 100vw;
+            height: 100vh;
+            border: none;
+            display: block;
+        }
+        
+        /* Hide all Neko UI elements */
+        .neko-menu,
+        .neko-header,
+        .neko-footer,
+        .neko-sidebar,
+        .neko-controls,
+        .neko-chat,
+        .neko-overlay {
+            display: none !important;
+            visibility: hidden !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="neko"></div>
+    
+    <script src="/static/js/neko.js"></script>
+    <script>
+        // Auto-connect and hide UI
+        window.addEventListener('load', function() {
+            // Auto-connect to Neko
+            if (window.neko) {
+                neko.connect();
+                
+                // Hide all UI elements
+                setTimeout(() => {
+                    const elements = document.querySelectorAll('.neko-menu, .neko-header, .neko-footer, .neko-sidebar, .neko-controls, .neko-chat, .neko-overlay');
+                    elements.forEach(el => {
+                        el.style.display = 'none';
+                        el.style.visibility = 'hidden';
+                    });
+                    
+                    // Force fullscreen video
+                    const video = document.querySelector('video');
+                    if (video) {
+                        video.style.width = '100vw';
+                        video.style.height = '100vh';
+                        video.style.objectFit = 'fill';
+                    }
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>

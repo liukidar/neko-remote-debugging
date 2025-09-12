@@ -12,11 +12,13 @@ session:
   merciful_reconnect: true
   implicit_hosting: true
   auto_login: true     # Auto-login users without showing login screen
+  auto_connect: true   # Auto-connect to session
+  auto_play: true      # Auto-play video stream
   cookie:
     enabled: false
 
-webui:
-  enabled: false       # Disable the Neko web interface completely
+webrtc:
+  audio: false                       # Disable WebRTC audio completely
 
 plugins:
   enabled: false
@@ -31,6 +33,22 @@ ui:
   hide_controls: true     # Hide all UI controls
   hide_sidebar: true      # Hide sidebar
   auto_fullscreen: true   # Auto fullscreen the video
+  hide_header: true       # Hide header
+  hide_footer: true       # Hide footer
+  minimal: true           # Minimal UI mode
+  kiosk: true             # Kiosk mode
+
+# Settings for automatic connection and fullscreen
+settings:
+  auto_connect: true
+  auto_fullscreen: true
+  hide_cursors: true
+
+# Client-side interface settings
+client:
+  hide_cursor: true
+  auto_play: true
+  auto_mute: true
 
 capture:
   video:
@@ -53,4 +71,7 @@ capture:
           bframes: "0"               # No B-frames for lower CPU usage
         show_pointer: false          # Disable cursor for performance
   audio:
-    enabled: false                   # Disable audio to save resources
+    enabled: false                   # Completely disable audio streaming
+    codec: ""                        # No audio codec
+    bitrate: 0                       # Zero audio bitrate
+    channels: 0                      # No audio channels
