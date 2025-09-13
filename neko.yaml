@@ -3,7 +3,7 @@
 # https://neko.m1k1o.net/docs/v3/configuration#file
 
 desktop:
-  screen: "${SCREEN_WIDTH:-1024}x${SCREEN_HEIGHT:-768}@15"
+  screen: "1024x768@15"
 
 member:
   provider: anonymous

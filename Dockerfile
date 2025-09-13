@@ -5,7 +5,7 @@ FROM $BASE_IMAGE
 
 RUN set -eux; \
     apt-get update; \
-    apt-get install -y --no-install-recommends openbox socat xdotool scrot chromium xvfb; \
+    apt-get install -y --no-install-recommends openbox socat xdotool scrot chromium xvfb pulseaudio; \
     # Clean up
     apt-get clean -y; \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/*
@@ -19,4 +19,7 @@ COPY neko.yaml /etc/neko/neko.yaml
 
 # Create chromium profile directory with correct permissions
 RUN mkdir -p /tmp/chromium-profile && \
-    chmod -R 777 /tmp/chromium-profile
+    chmod -R 777 /tmp/chromium-profile && \
+    # Create directory for Neko input driver socket
+    mkdir -p /tmp && \
+    chown -R neko:neko /tmp

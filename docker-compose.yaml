@@ -28,6 +28,10 @@ services:
       # Screen dimensions (used by Xvfb, Neko, and video pipelines)
       SCREEN_WIDTH: 1024
       SCREEN_HEIGHT: 768
+      # Neko-specific screen configuration
+      NEKO_DESKTOP_SCREEN: "1024x768@15"
+      NEKO_SCREEN_WIDTH: 1024
+      NEKO_SCREEN_HEIGHT: 768
       # Optimized for 2 CPUs
       MALLOC_ARENA_MAX: 2
       MALLOC_MMAP_THRESHOLD_: 131072
