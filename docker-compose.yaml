@@ -13,17 +13,23 @@ services:
       # Persistent browser profile storage (custom location)
       # - "chromium-profile:/tmp/chromium-profile"
     tmpfs:
-      # Use smaller tmpfs for cache and temporary files to conserve RAM
-      - /tmp:exec,size=512m
-      - /var/tmp:exec,size=256m
-      - /home/neko/.cache:exec,size=256m
+      # Optimized tmpfs for fastest I/O
+      - /tmp:exec,noatime,size=1g
+      - /var/tmp:exec,noatime,size=256m
+      - /home/neko/.cache:exec,noatime,size=256m
+      - /tmp/chromium-profile:exec,noatime,size=512m
     mem_limit: 4g
     memswap_limit: 4g
     cpus: 2.0
     ulimits:
       nofile:
-        soft: 32768
-        hard: 32768
+        soft: 65536
+        hard: 65536
+    # Startup optimization
+    init: true
+    # Security optimizations that can speed up startup
+    security_opt:
+      - seccomp:unconfined
     environment:
       # Screen dimensions (used by Xvfb, Neko, and video pipelines)
       SCREEN_WIDTH: 1024
@@ -32,10 +38,12 @@ services:
       NEKO_DESKTOP_SCREEN: "1024x768@15"
       NEKO_SCREEN_WIDTH: 1024
       NEKO_SCREEN_HEIGHT: 768
-      # Optimized for 2 CPUs
+      # Optimized for fastest startup
       MALLOC_ARENA_MAX: 2
       MALLOC_MMAP_THRESHOLD_: 131072
       MALLOC_TRIM_THRESHOLD_: 262144
+      # Disable unnecessary background services
+      NEKO_HEALTH_CHECK: "false"
       # Use config file instead of individual environment variables
       NEKO_CONFIG: "/etc/neko/neko.yaml"
       # Force anonymous login and autoplay via environment variables

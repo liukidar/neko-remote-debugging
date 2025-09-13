@@ -23,6 +23,8 @@ COPY --chown=neko extension/ /home/neko/extension/
 # Create necessary directories and dummy audio config
 RUN mkdir -p /tmp/chromium-profile && \
     chmod -R 777 /tmp/chromium-profile && \
+    # Pre-create chromium profile structure for faster startup
+    mkdir -p /tmp/chromium-profile/Default && \
     # Create X11 socket directory for the X server
     mkdir -p /tmp/.X11-unix && \
     chmod 1777 /tmp/.X11-unix && \
@@ -36,4 +38,9 @@ RUN mkdir -p /tmp/chromium-profile && \
     chown -R neko:neko /home/neko/.asoundrc && \
     # Create uBlock Origin configuration to enable it by default
     mkdir -p /home/neko/.config/chromium/Default/Extensions/cjpalhdlnbpafiamejdnhcphjbkeiagm && \
-    chown -R neko:neko /home/neko/.config/chromium
+    chown -R neko:neko /home/neko/.config/chromium && \
+    # Pre-warm Chromium by creating cache directories
+    mkdir -p /tmp/chromium-profile/Default/Local\ Storage && \
+    mkdir -p /tmp/chromium-profile/Default/Session\ Storage && \
+    mkdir -p /tmp/chromium-profile/ShaderCache && \
+    chmod -R 777 /tmp/chromium-profile
