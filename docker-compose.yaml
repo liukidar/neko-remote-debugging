@@ -2,7 +2,7 @@ services:
   neko:
     build: .
     restart: unless-stopped
-    shm_size: 1024mb
+    shm_size: 2048mb
     cap_add:
       - SYS_ADMIN
     ports:
@@ -17,18 +17,21 @@ services:
       - /tmp:exec,size=512m
       - /var/tmp:exec,size=256m
       - /home/neko/.cache:exec,size=256m
-    mem_limit: 2g
-    memswap_limit: 2g
-    cpus: 1.0
+    mem_limit: 4g
+    memswap_limit: 4g
+    cpus: 2.0
     ulimits:
       nofile:
         soft: 32768
         hard: 32768
     environment:
-      # Low-resource optimizations
-      MALLOC_ARENA_MAX: 1
-      MALLOC_MMAP_THRESHOLD_: 65536
-      MALLOC_TRIM_THRESHOLD_: 131072
+      # Screen dimensions (used by Xvfb, Neko, and video pipelines)
+      SCREEN_WIDTH: 1024
+      SCREEN_HEIGHT: 768
+      # Optimized for 2 CPUs
+      MALLOC_ARENA_MAX: 2
+      MALLOC_MMAP_THRESHOLD_: 131072
+      MALLOC_TRIM_THRESHOLD_: 262144
       # Use config file instead of individual environment variables
       NEKO_CONFIG: "/etc/neko/neko.yaml"
       # Force anonymous login and autoplay via environment variables

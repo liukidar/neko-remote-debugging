@@ -3,7 +3,7 @@
 # https://neko.m1k1o.net/docs/v3/configuration#file
 
 desktop:
-  screen: "1024x768@15"
+  screen: "${SCREEN_WIDTH:-1024}x${SCREEN_HEIGHT:-768}@15"
 
 member:
   provider: anonymous
@@ -52,19 +52,19 @@ capture:
     pipelines:
       # VP8 pipeline - back to working baseline
       fast_vp8:
-        width: "1024"
-        height: "768"
+        width: "${SCREEN_WIDTH:-1024}"
+        height: "${SCREEN_HEIGHT:-768}"
         fps: "15"
         gst_encoder: "vp8enc"
         gst_params:
           target-bitrate: "750000"     # Keep working 750k bitrate
-          cpu-used: "14"               # Push encoding speed further (was 10)
-          deadline: "50000"            # More aggressive 50ms deadline (was 50ms)
+          cpu-used: "12"               # Slightly less aggressive for stability
+          deadline: "50000"            # More aggressive 50ms deadline
           error-resilient: "1"         # Better for packet loss
           lag-in-frames: "0"           # No buffering for instant start
-          min-quantizer: "6"           # Higher min quality (less CPU on low quality)
+          min-quantizer: "6"           # Higher min quality
           max-quantizer: "28"          # Lower max quality (prioritize speed)
-          threads: "1"                 # Single thread
+          threads: "2"                 # Use 2 threads for 2 CPU cores
           keyframe-max-dist: "15"      # Keyframe every second at 15fps
           token-partitions: "0"        # Simplest token partitioning
           # end-usage: "cbr"             # Constant bitrate mode for predictable dropping
@@ -74,15 +74,15 @@ capture:
         show_pointer: false
       # Optimized H.264 pipeline for fast connection and low delay
       fast_h264:
-        width: "1024"
-        height: "768"
+        width: "${SCREEN_WIDTH:-1024}"
+        height: "${SCREEN_HEIGHT:-768}"
         fps: "15"
         gst_encoder: "x264enc"
         gst_params:
           bitrate: "750"
           speed-preset: "ultrafast"
           tune: "zerolatency"
-          threads: "1"
+          threads: "2"                  # Use 2 threads for 2 CPU cores
           qp-min: "18"               # Higher quality range start
           qp-max: "28"               # Lower quality range end
           ref: "1"                   # Minimal reference frames

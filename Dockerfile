@@ -5,7 +5,7 @@ FROM $BASE_IMAGE
 
 RUN set -eux; \
     apt-get update; \
-    apt-get install -y --no-install-recommends openbox socat xdotool scrot chromium; \
+    apt-get install -y --no-install-recommends openbox socat xdotool scrot chromium xvfb; \
     # Clean up
     apt-get clean -y; \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/*
