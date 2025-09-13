@@ -18,6 +18,8 @@
   "PromptForDownloadLocation": false,
   "BookmarkBarEnabled": false,
   "PasswordManagerEnabled": false,
+  "ShowFullUrlsInAddressBar": true,
+  "HideWebStoreIcon": true,
   "URLAllowlist": [
     "file:///home/neko/Downloads"
   ],
