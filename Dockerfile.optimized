@@ -55,9 +55,5 @@ RUN set -eux; \
     # Set ownership in one command
     chown -R neko:neko /home/neko/
 
-# Add healthcheck for faster container readiness detection
-HEALTHCHECK --interval=5s --timeout=3s --start-period=10s --retries=3 \
-    CMD curl -f http://localhost:8080/health || exit 1
-
 # Use runtime stage as final image
 FROM runtime
