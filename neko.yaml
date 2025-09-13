@@ -52,8 +52,8 @@ capture:
     pipelines:
       # VP8 pipeline - back to working baseline
       fast_vp8:
-        width: "${SCREEN_WIDTH:-1024}"
-        height: "${SCREEN_HEIGHT:-768}"
+        width: "1024"
+        height: "768"
         fps: "15"
         gst_encoder: "vp8enc"
         gst_params:
