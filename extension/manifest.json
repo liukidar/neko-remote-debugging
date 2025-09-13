@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Smooth",
+  "version": "1.2",
+  "description": "Smooth browser web extension.",
+  "permissions": [
+    "declarativeNetRequest",
+    "declarativeNetRequestWithHostAccess"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}

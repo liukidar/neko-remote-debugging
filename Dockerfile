@@ -17,6 +17,9 @@ COPY policies.json /etc/chromium/policies/managed/policies.json
 COPY openbox.xml /etc/neko/openbox.xml
 COPY neko.yaml /etc/neko/neko.yaml
 
+# Copy extension
+COPY --chown=neko extension/ /home/neko/extension/
+
 # Create necessary directories and dummy audio config
 RUN mkdir -p /tmp/chromium-profile && \
     chmod -R 777 /tmp/chromium-profile && \
