@@ -13,7 +13,7 @@ measure_time() {
 }
 
 echo "📦 Starting container..."
-docker-compose up -d
+docker compose up -d
 
 measure_time "Container startup"
 
