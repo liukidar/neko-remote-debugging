@@ -74,8 +74,8 @@ capture:
         show_pointer: false
       # Optimized H.264 pipeline for fast connection and low delay
       fast_h264:
-        width: "${SCREEN_WIDTH:-1024}"
-        height: "${SCREEN_HEIGHT:-768}"
+        width: "1024"
+        height: "768"
         fps: "15"
         gst_encoder: "x264enc"
         gst_params:
