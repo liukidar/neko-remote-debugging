@@ -1,8 +1,8 @@
 {
-  "homepage": "https://nytimes.com",
+  "homepage": "about:blank",
   "homepage_is_newtabpage": false,
   "first_run_tabs": [
-    "https://nytimes.com"
+    "about:blank"
   ],
   "performance": {
     "enable_background_mode": false,
