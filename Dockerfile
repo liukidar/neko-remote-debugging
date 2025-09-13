@@ -33,4 +33,7 @@ RUN mkdir -p /tmp/chromium-profile && \
     mkdir -p /home/neko/.asoundrc.d && \
     echo 'pcm.!default { type null }' > /home/neko/.asoundrc && \
     echo 'ctl.!default { type null }' >> /home/neko/.asoundrc && \
-    chown -R neko:neko /home/neko/.asoundrc
+    chown -R neko:neko /home/neko/.asoundrc && \
+    # Create uBlock Origin configuration to enable it by default
+    mkdir -p /home/neko/.config/chromium/Default/Extensions/cjpalhdlnbpafiamejdnhcphjbkeiagm && \
+    chown -R neko:neko /home/neko/.config/chromium

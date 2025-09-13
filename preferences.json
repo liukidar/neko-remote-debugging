@@ -114,6 +114,11 @@
     "using_default_name": false,
     "using_gaia_avatar": false
   },
+  "extensions": {
+    "ui": {
+      "developer_mode": false
+    }
+  },
   "signin": {
     "allowed": false
   }
