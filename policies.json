@@ -33,7 +33,10 @@
     "cjpalhdlnbpafiamejdnhcphjbkeiagm",
     "mnjggcdmjocbbbhaepdhchncahnbgone"
   ],
-  "ExtensionInstallBlocklist": [
-    "*"
-  ]
+  "ExtensionInstallBlocklist": [],
+  "ExtensionSettings": {
+    "*": {
+      "installation_mode": "allowed"
+    }
+  }
 }
