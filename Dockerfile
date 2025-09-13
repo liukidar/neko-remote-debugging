@@ -11,7 +11,7 @@ RUN set -eux; \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 # Copy configuration files
-COPY supervisord.conf /etc/neko/supervisord/chromium.conf
+COPY supervisord.conf /etc/neko/supervisord/chromium.conf.template
 COPY --chown=neko preferences.json /home/neko/.config/chromium/Default/Preferences
 COPY policies.json /etc/chromium/policies/managed/policies.json
 COPY openbox.xml /etc/neko/openbox.xml
@@ -19,6 +19,12 @@ COPY neko.yaml /etc/neko/neko.yaml
 
 # Copy extension
 COPY --chown=neko extension/ /home/neko/extension/
+
+# Detect Chromium version and create final config with correct user agent
+RUN CHROMIUM_VERSION=$(chromium --version | grep -oP '\d+\.\d+\.\d+\.\d+') && \
+    echo "Detected Chromium version: $CHROMIUM_VERSION" && \
+    sed "s/CHROMIUM_VERSION_PLACEHOLDER/$CHROMIUM_VERSION/g" /etc/neko/supervisord/chromium.conf.template > /etc/neko/supervisord/chromium.conf && \
+    rm /etc/neko/supervisord/chromium.conf.template
 
 # Create necessary directories and dummy audio config
 RUN mkdir -p /tmp/chromium-profile && \
