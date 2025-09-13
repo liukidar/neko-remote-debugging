@@ -7,8 +7,10 @@ services:
       - SYS_ADMIN
     ports:
       - '8080:8080'
-      - '9223:9223'                    # Socat proxy for external DevTools access
+      - '9222:9222'                    # Direct CDP access for Docker containers
       - '52000-52100:52000-52100/udp'
+    networks:
+      - browser-network
     # volumes:
       # Persistent browser profile storage (custom location)
       # - "chromium-profile:/tmp/chromium-profile"
@@ -50,6 +52,10 @@ services:
       NEKO_PASSWORD: ""
       NEKO_PASSWORD_ADMIN: ""
       NEKO_MEMBER_PROVIDER: "anonymous"
+
+networks:
+  browser-network:
+    driver: bridge
 
 # volumes:
 #   chromium-profile:
