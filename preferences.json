@@ -116,7 +116,7 @@
   },
   "extensions": {
     "ui": {
-      "developer_mode": false
+      "developer_mode": true
     }
   },
   "signin": {
