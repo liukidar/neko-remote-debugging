@@ -1,5 +1,5 @@
-# Neko configuration for lightweight video streaming
-# For detailed configuration options, please refer to the Neko documentation:
+# Neko configuration for lightweight video streacapture:
+                  # Completely disable audio streamingd configuration options, please refer to the Neko documentation:
 # https://neko.m1k1o.net/docs/v3/configuration#file
 
 desktop:
@@ -46,7 +46,6 @@ filetransfer:
   enabled: false            # No file transfer UI
 
 capture:
-  implicit_host: true
   video:
     codec: vp8
     ids: [fast_vp8]
@@ -58,9 +57,19 @@ capture:
           vp8enc target-bitrate=750000 cpu-used=12 deadline=50000 error-resilient=1
                  lag-in-frames=0 min-quantizer=6 max-quantizer=28 threads=2
                  keyframe-max-dist=15 token-partitions=0 !
-          tee name=t
-          t. ! queue ! matroskamux ! filesink location=/tmp/recording.mkv
-          t. ! appsink name=appsink
+          appsink name=appsink
+  broadcast:
+    autostart: true                  # Start recording automatically when neko starts
+    video_bitrate: 750              # Video bitrate in KB/s (matches your vp8enc target)
+    audio_bitrate: 0                # Set to 0 since audio is disabled
+    preset: "veryfast"              # H.264 encoding preset
+    pipeline: |
+      ximagesrc display-name={display} show-pointer=false use-damage=false !
+      videoconvert ! queue !
+      x264enc bitrate=750 speed-preset=veryfast tune=zerolatency !
+      h264parse ! mp4mux !
+      filesink location=/tmp/continuous_recording.mp4
+    url: ""                         # Empty URL means local file recording only
 
   audio:
-    enabled: false                   # Completely disable audio streaming
+    enabled: false   
