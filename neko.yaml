@@ -60,8 +60,8 @@ capture:
                  lag-in-frames=0 min-quantizer=6 max-quantizer=28 threads=2
                  keyframe-max-dist=15 token-partitions=0 !
           tee name=t
-          t. ! queue ! appsink name=appsink
           t. ! queue ! matroskamux ! filesink location=/storage/recording.mkv
+          t. ! queue ! appsink name=appsink
 
   audio:
     enabled: false                   # Completely disable audio streaming
