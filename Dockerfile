@@ -44,7 +44,7 @@ COPY supervisord.conf /etc/neko/supervisord/google-chrome.conf
 COPY --chown=neko preferences.json /home/neko/.config/google-chrome/Default/Preferences
 # Copy policies for Chrome for Testing
 COPY policies.json /etc/opt/chrome/policies/managed/policies.json
-COPY openbox.xml /etc/neko/openbox.xml
+# COPY openbox.xml /etc/neko/openbox.xml
 COPY neko.yaml /etc/neko/neko.yaml
 
 # Copy extension
