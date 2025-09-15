@@ -11,9 +11,6 @@ services:
       - '52000-52100:52000-52100/udp'
     networks:
       - browser-network
-    volumes:
-      # Persistent storage for recordings
-      - "./recordings:/storage"
     # volumes:
       # Persistent browser profile storage (custom location)
       # - "chromium-profile:/tmp/chromium-profile"
@@ -56,6 +53,9 @@ services:
       NEKO_PASSWORD_ADMIN: ""
       NEKO_MEMBER_PROVIDER: "anonymous"
 
+volumes:
+  # Persistent storage for recordings
+  - "./recordings:/storage"
 networks:
   browser-network:
     driver: bridge
