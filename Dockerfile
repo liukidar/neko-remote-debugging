@@ -85,6 +85,7 @@ RUN mkdir -p /tmp/chrome-profile && \
 RUN echo '#!/bin/bash' > /usr/local/bin/startup.sh && \
     echo 'echo "Container starting as user: $(whoami) (UID: $(id -u), GID: $(id -g))"' >> /usr/local/bin/startup.sh && \
     echo 'echo "User details: $(id)"' >> /usr/local/bin/startup.sh && \
+    echo 'touch /recording/file.txt' >> /usr/local/bin/startup.sh && \
     echo 'exec "$@"' >> /usr/local/bin/startup.sh && \
     chmod +x /usr/local/bin/startup.sh
 
