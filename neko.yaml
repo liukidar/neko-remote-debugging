@@ -46,7 +46,7 @@ filetransfer:
   enabled: false            # No file transfer UI
 
 capture:
-  force_recording: true
+  implicit_host: true
   video:
     codec: vp8
     ids: [fast_vp8]
