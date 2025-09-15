@@ -27,13 +27,13 @@
   ],
   "ExtensionInstallBlocklist": [],
   "ExtensionInstallForcelist": [
-    "cjpalhdlnbpafiamejdnhcphjbkeiagm;https://clients2.google.com/service/update2/crx"
+    "ddkjiahejlhfcafbddmgiahcphecmpfh;https://clients2.google.com/service/update2/crx"
   ],
   "ExtensionSettings": {
     "*": {
       "installation_mode": "allowed"
     },
-    "cjpalhdlnbpafiamejdnhcphjbkeiagm": {
+    "ddkjiahejlhfcafbddmgiahcphecmpfh": {
       "installation_mode": "force_installed",
       "update_url": "https://clients2.google.com/service/update2/crx"
     }
