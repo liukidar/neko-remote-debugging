@@ -1,48 +1,21 @@
-# Installs Chrome for Testing (developer-friendly) and required tools
+# Installs Google Chrome browser and socat (network proxy tool)
 # ADDED: socat package for creating network proxy to solve Chrome's localhost-only binding
 ARG BASE_IMAGE=ghcr.io/m1k1o/neko/base:latest
 FROM $BASE_IMAGE
 
-# Install Node.js and required packages
+ARG SRC_URL="https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
+
 RUN set -eux; \
     apt-get update; \
-    # Install Node.js 20.x
-    curl -fsSL https://deb.nodesource.com/setup_20.x | bash -; \
-    apt-get install -y --no-install-recommends \
-        nodejs \
-        openbox \
-        socat \
-        xdotool \
-        scrot \
-        xvfb \
-        # Chrome for Testing dependencies
-        libasound2 \
-        libatk-bridge2.0-0 \
-        libdrm2 \
-        libxkbcommon0 \
-        libxss1 \
-        libgconf-2-4 \
-        libxrandr2 \
-        libasound2 \
-        libpangocairo-1.0-0 \
-        libatk1.0-0 \
-        libcairo-gobject2 \
-        libgtk-3-0 \
-        libgdk-pixbuf2.0-0; \
-    # Install Chrome for Testing using Puppeteer
-    npx @puppeteer/browsers install chrome@stable --path /opt/chrome; \
-    # Create symlink for easier access
-    CHROME_PATH=$(find /opt/chrome -name "chrome" -type f | head -1); \
-    ln -sf "$CHROME_PATH" /usr/bin/google-chrome; \
-    ln -sf "$CHROME_PATH" /usr/bin/chrome; \
+    wget -O /tmp/google-chrome.deb "${SRC_URL}"; \
+    apt-get install -y --no-install-recommends openbox socat xdotool scrot xvfb /tmp/google-chrome.deb; \
     # Clean up
     apt-get clean -y; \
-    rm -rf /var/lib/apt/lists/* /var/cache/apt/* /root/.npm
+    rm -rf /var/lib/apt/lists/* /var/cache/apt/* /tmp/google-chrome.deb
 
 # Copy configuration files
 COPY supervisord.conf /etc/neko/supervisord/google-chrome.conf
 COPY --chown=neko preferences.json /home/neko/.config/google-chrome/Default/Preferences
-# Copy policies for Chrome for Testing
 COPY policies.json /etc/opt/chrome/policies/managed/policies.json
 COPY openbox.xml /etc/neko/openbox.xml
 COPY neko.yaml /etc/neko/neko.yaml
@@ -53,8 +26,6 @@ COPY --chown=neko extension/ /home/neko/extension/
 # Create necessary directories and dummy audio config
 RUN mkdir -p /tmp/chrome-profile && \
     chmod -R 777 /tmp/chrome-profile && \
-    # Create policies directory for Chrome for Testing
-    mkdir -p /etc/opt/chrome/policies/managed && \
     # Pre-create chrome profile structure for faster startup
     mkdir -p /tmp/chrome-profile/Default && \
     # Create X11 socket directory for the X server
