@@ -14,7 +14,7 @@ services:
       - browser-network
     volumes:
       # Persistent storage for recordings
-      - "/tmp:/tmp"
+      - recordings
     # volumes:
       # Persistent browser profile storage (custom location)
       # - "chromium-profile:/tmp/chromium-profile"
@@ -61,5 +61,5 @@ networks:
   browser-network:
     driver: bridge
 
-# volumes:
-#   chromium-profile:
+volumes:
+  recordings: ./recordings:/storage
