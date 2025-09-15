@@ -13,7 +13,7 @@ services:
       - browser-network
     volumes:
       # Persistent storage for recordings
-      - "./recordings:/storage"
+      - "./recordings:/recording"
     # volumes:
       # Persistent browser profile storage (custom location)
       # - "chromium-profile:/tmp/chromium-profile"
