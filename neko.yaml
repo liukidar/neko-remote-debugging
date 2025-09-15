@@ -50,30 +50,12 @@ capture:
     codec: vp8
     ids: [fast_vp8]
     pipelines:
-      # VP8 pipeline - back to working baseline with recording
-      fast_vp8:
-        width: "1024"
-        height: "768"
-        fps: "15"
-        gst_pipeline: |
-          ximagesrc display-name={display} show-pointer=false use-damage=false
-          ! video/x-raw,framerate=15/1 ! videoconvert ! queue
-          ! vp8enc
-            name=encoder
-            target-bitrate=750000
-            cpu-used=12
-            deadline=50000
-            error-resilient=1
-            lag-in-frames=0
-            min-quantizer=6
-            max-quantizer=28
-            threads=2
-            keyframe-max-dist=15
-            token-partitions=0
-          ! tee name=t
-          t. ! queue ! appsink name=appsink
-          t. ! queue ! webmmux ! multifilesink
-            location=/storage/neko-recording-%05d.webm
-            next-file=3
+      gst_pipeline: >
+        ximagesrc display-name={display} show-pointer=false use-damage=false !
+        video/x-raw, width=1024, height=768, framerate=15/1 !
+        vp8enc target-bitrate=750000 cpu-used=12 deadline=50000 error-resilient=1
+              lag-in-frames=0 min-quantizer=6 max-quantizer=28 threads=2
+              keyframe-max-dist=15 token-partitions=0 !
+        appsink name=appsink
   audio:
     enabled: false                   # Completely disable audio streaming
