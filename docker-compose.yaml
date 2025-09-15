@@ -62,4 +62,4 @@ networks:
     driver: bridge
 
 volumes:
-  recordings: ./recordings:/storage
+  - recordings: ./recordings:/storage
