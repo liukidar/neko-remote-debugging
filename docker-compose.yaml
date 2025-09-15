@@ -13,17 +13,21 @@ services:
     networks:
       - browser-network
     volumes:
-      # Persistent storage for recordings
-      - "./recordings:/recording"
+      # Share host tmpfs instead of using Docker's isolated tmpfs
+      - "/tmp:/tmp"
+      - "/var/tmp:/var/tmp"
+      # Create subdirectories in host tmp for cache and profile
+      - "/tmp/neko-cache:/home/neko/.cache"
+      - "/tmp/neko-chromium-profile:/tmp/chromium-profile"
     # volumes:
       # Persistent browser profile storage (custom location)
       # - "chromium-profile:/tmp/chromium-profile"
-    tmpfs:
-      # Optimized tmpfs for fastest I/O
-      - /tmp:exec,noatime,size=1g
-      - /var/tmp:exec,noatime,size=256m
-      - /home/neko/.cache:exec,noatime,size=256m
-      - /tmp/chromium-profile:exec,noatime,size=512m
+    # tmpfs:
+      # Optimized tmpfs for fastest I/O (now using host tmpfs via bind mounts)
+      # - /tmp:exec,noatime,size=1g
+      # - /var/tmp:exec,noatime,size=256m
+      # - /home/neko/.cache:exec,noatime,size=256m
+      # - /tmp/chromium-profile:exec,noatime,size=512m
     mem_limit: 4g
     memswap_limit: 4g
     cpus: 2.0
