@@ -52,8 +52,11 @@ capture:
     pipelines:
       fast_vp8:
         gst_pipeline: >
-          ximagesrc display-name={display} show-pointer=false use-damage=false ! videoconvert ! queue
-          ! vp8enc target-bitrate=750000 cpu-used=12 deadline=50000 error-resilient=1
+          ximagesrc display-name={display} show-pointer=false use-damage=false !
+          video/x-raw, width=1024, height=768, framerate=15/1 !
+          videoconvert !
+          video/x-raw,format=I420 !
+          vp8enc target-bitrate=750000 cpu-used=12 deadline=50000 error-resilient=1
                 lag-in-frames=0 min-quantizer=6 max-quantizer=28 threads=2
                 keyframe-max-dist=15 token-partitions=0 ! tee name=t
           t. ! queue ! appsink name=appsink
