@@ -1,43 +1,11 @@
 {
-  "AutofillAddressEnabled": false,
-  "AutofillCreditCardEnabled": false,
-  "BrowserSignin": 0,
-  "DefaultNotificationsSetting": 2,
-  "DeveloperToolsAvailability": 1,
-  "EditBookmarksEnabled": false,
-  "FullscreenAllowed": true,
-  "IncognitoModeAvailability": 1,
-  "SyncDisabled": true,
-  "AutoplayAllowed": false,
-  "BrowserAddPersonEnabled": false,
-  "BrowserGuestModeEnabled": false,
-  "DefaultPopupsSetting": 2,
-  "DownloadRestrictions": 3,
-  "VideoCaptureAllowed": true,
-  "AllowFileSelectionDialogs": false,
-  "PromptForDownloadLocation": false,
-  "BookmarkBarEnabled": false,
-  "PasswordManagerEnabled": false,
-  "URLAllowlist": [
-    "file:///home/neko/Downloads"
-  ],
-  "URLBlocklist": [
-    "file://*",
-    "chrome://policy"
-  ],
-  "ExtensionInstallBlocklist": [],
   "ExtensionInstallForcelist": [
     "cjpalhdlnbpafiamejdnhcphjbkeiagm;https://clients2.google.com/service/update2/crx"
   ],
   "ExtensionSettings": {
-    "*": {
-      "installation_mode": "allowed",
-      "toolbar_pin": "force_pinned"
-    },
     "cjpalhdlnbpafiamejdnhcphjbkeiagm": {
       "installation_mode": "force_installed",
       "update_url": "https://clients2.google.com/service/update2/crx"
     }
-  },
-  "DeveloperToolsDisabled": false
+  }
 }
