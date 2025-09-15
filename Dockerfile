@@ -66,7 +66,7 @@ RUN mkdir -p /tmp/chrome-profile && \
     # Create recordings directory for video recording
     mkdir -p /storage && \
     chown -R neko:neko /storage && \
-    chmod 755 /storage && \
+    chmod -R 775 /storage && \
     # Create dummy ALSA config for audio support without actual audio
     mkdir -p /home/neko/.asoundrc.d && \
     echo 'pcm.!default { type null }' > /home/neko/.asoundrc && \
