@@ -41,14 +41,14 @@ RUN set -eux; \
 
 # Copy configuration files
 COPY supervisord.conf /etc/neko/supervisord/google-chrome.conf
-COPY --chown=neko preferences.json /home/neko/.config/google-chrome/Default/Preferences
+COPY --chown=root preferences.json /home/neko/.config/google-chrome/Default/Preferences
 # Copy policies for Chrome for Testing
 COPY policies.json /etc/opt/chrome/policies/managed/policies.json
 # COPY openbox.xml /etc/neko/openbox.xml
 COPY neko.yaml /etc/neko/neko.yaml
 
 # Copy extension
-COPY --chown=neko extension/ /home/neko/extension/
+COPY --chown=root extension/ /home/neko/extension/
 
 # Create necessary directories and dummy audio config
 RUN mkdir -p /tmp/chrome-profile && \
@@ -62,19 +62,19 @@ RUN mkdir -p /tmp/chrome-profile && \
     chmod 1777 /tmp/.X11-unix && \
     # Create directory for Neko input driver socket
     mkdir -p /tmp && \
-    chown -R neko:neko /tmp && \
+    chown -R root:root /tmp && \
     # Create recordings directory for video recording
     mkdir -p /recording && \
-    chown -R neko:neko /recording && \
+    chown -R root:root /recording && \
     chmod -R 775 /recording && \
     # Create dummy ALSA config for audio support without actual audio
     mkdir -p /home/neko/.asoundrc.d && \
     echo 'pcm.!default { type null }' > /home/neko/.asoundrc && \
     echo 'ctl.!default { type null }' >> /home/neko/.asoundrc && \
-    chown -R neko:neko /home/neko/.asoundrc && \
+    chown -R root:root /home/neko/.asoundrc && \
     # Create uBlock Origin configuration to enable it by default
     mkdir -p /home/neko/.config/google-chrome/Default/Extensions/cjpalhdlnbpafiamejdnhcphjbkeiagm && \
-    chown -R neko:neko /home/neko/.config/google-chrome && \
+    chown -R root:root /home/neko/.config/google-chrome && \
     # Pre-warm Chrome by creating cache directories
     mkdir -p /tmp/chrome-profile/Default/Local\ Storage && \
     mkdir -p /tmp/chrome-profile/Default/Session\ Storage && \

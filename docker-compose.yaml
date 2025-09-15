@@ -3,6 +3,7 @@ services:
     build: .
     restart: unless-stopped
     shm_size: 2048mb
+    user: "0:0"  # Run as root to allow supervisord privilege dropping
     cap_add:
       - SYS_ADMIN
     ports:
