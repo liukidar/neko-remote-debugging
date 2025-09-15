@@ -64,7 +64,6 @@ RUN mkdir -p /tmp/chrome-profile && \
     mkdir -p /tmp && \
     chown -R neko:neko /tmp && \
     # Create recordings directory for video recording
-    mkdir -p /recording && \
     chown -R neko:neko /recording && \
     chmod -R 775 /recording && \
     # Create dummy ALSA config for audio support without actual audio
