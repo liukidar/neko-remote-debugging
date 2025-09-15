@@ -80,5 +80,3 @@ RUN mkdir -p /tmp/chrome-profile && \
     mkdir -p /tmp/chrome-profile/Default/Session\ Storage && \
     mkdir -p /tmp/chrome-profile/ShaderCache && \
     chmod -R 777 /tmp/chrome-profile
-
-USER neko
