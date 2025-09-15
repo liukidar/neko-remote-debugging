@@ -42,8 +42,6 @@ RUN mkdir -p /tmp/chrome-profile && \
     # Create uBlock Origin configuration to enable it by default
     mkdir -p /home/neko/.config/google-chrome/Default/Extensions/cjpalhdlnbpafiamejdnhcphjbkeiagm && \
     chown -R neko:neko /home/neko/.config/google-chrome && \
-    # Create extension directories in profile
-    mkdir -p /tmp/chrome-profile/Default/Extensions && \
     # Pre-warm Chrome by creating cache directories
     mkdir -p /tmp/chrome-profile/Default/Local\ Storage && \
     mkdir -p /tmp/chrome-profile/Default/Session\ Storage && \
