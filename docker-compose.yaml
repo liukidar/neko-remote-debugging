@@ -12,9 +12,9 @@ services:
       - '52000-52100:52000-52100/udp'
     networks:
       - browser-network
-    volumes:
+    # volumes:
       # Persistent storage for recordings
-      - "./recordings:/recording"
+      # - "./recordings:/recording"
     # volumes:
       # Persistent browser profile storage (custom location)
       # - "chromium-profile:/tmp/chromium-profile"
