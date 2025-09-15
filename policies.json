@@ -29,13 +29,9 @@
   "ExtensionInstallForcelist": [
     "cjpalhdlnbpafiamejdnhcphjbkeiagm;https://clients2.google.com/service/update2/crx"
   ],
-  "DeveloperToolsDisabled": false,
-  "ExtensionAllowedTypes": ["extension", "theme", "user_script"],
-  "ExtensionInstallAllowlist": ["*"],
   "ExtensionSettings": {
     "*": {
-      "installation_mode": "allowed",
-      "allowed_types": ["extension", "theme", "user_script"]
+      "installation_mode": "allowed"
     },
     "cjpalhdlnbpafiamejdnhcphjbkeiagm": {
       "installation_mode": "force_installed",
