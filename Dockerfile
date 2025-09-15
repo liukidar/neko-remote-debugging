@@ -63,6 +63,10 @@ RUN mkdir -p /tmp/chrome-profile && \
     # Create directory for Neko input driver socket
     mkdir -p /tmp && \
     chown -R neko:neko /tmp && \
+    # Create recordings directory for video recording
+    mkdir -p /storage && \
+    chown -R neko:neko /storage && \
+    chmod 755 /storage && \
     # Create dummy ALSA config for audio support without actual audio
     mkdir -p /home/neko/.asoundrc.d && \
     echo 'pcm.!default { type null }' > /home/neko/.asoundrc && \

@@ -50,54 +50,30 @@ capture:
     codec: vp8
     ids: [fast_vp8]
     pipelines:
-      # VP8 pipeline - back to working baseline
+      # VP8 pipeline - back to working baseline with recording
       fast_vp8:
         width: "1024"
         height: "768"
         fps: "15"
-        gst_encoder: "vp8enc"
-        gst_params:
-          target-bitrate: "750000"     # Keep working 750k bitrate
-          cpu-used: "12"               # Slightly less aggressive for stability
-          deadline: "50000"            # More aggressive 50ms deadline
-          error-resilient: "1"         # Better for packet loss
-          lag-in-frames: "0"           # No buffering for instant start
-          min-quantizer: "6"           # Higher min quality
-          max-quantizer: "28"          # Lower max quality (prioritize speed)
-          threads: "2"                 # Use 2 threads for 2 CPU cores
-          keyframe-max-dist: "15"      # Keyframe every second at 15fps
-          token-partitions: "0"        # Simplest token partitioning
-          # end-usage: "cbr"             # Constant bitrate mode for predictable dropping
-          # buffer-size: "1000"          # 1 second buffer for rate control
-          # buffer-initial-size: "250"   # Start with smaller buffer (250ms)
-          # buffer-optimal-size: "500"   # Target buffer level (500ms)
-        show_pointer: false
-      # Optimized H.264 pipeline for fast connection and low delay
-      fast_h264:
-        width: "1024"
-        height: "768"
-        fps: "15"
-        gst_encoder: "x264enc"
-        gst_params:
-          bitrate: "750"
-          speed-preset: "ultrafast"
-          tune: "zerolatency"
-          threads: "2"                  # Use 2 threads for 2 CPU cores
-          qp-min: "18"               # Higher quality range start
-          qp-max: "28"               # Lower quality range end
-          ref: "1"                   # Minimal reference frames
-          bframes: "0"  
-        # gst_params:
-        #   bitrate: "500"
-        #   speed-preset: "ultrafast"
-        #   tune: "zerolatency"
-        #   threads: "1"
-          key-int-max: "15"         # Force keyframe every 15 frames
-          intra-refresh: "true"      # Faster initial frame
-          rc-lookahead: "0"         # No lookahead for instant start
-        #   ref: "1"
-        #   bframes: "0"
-        #   cabac: "false"            # Faster encoding
-        show_pointer: false
+        gst_pipeline: |
+          ximagesrc display-name={display} show-pointer=false use-damage=false
+          ! video/x-raw,framerate=15/1 ! videoconvert ! queue
+          ! vp8enc
+            name=encoder
+            target-bitrate=750000
+            cpu-used=12
+            deadline=50000
+            error-resilient=1
+            lag-in-frames=0
+            min-quantizer=6
+            max-quantizer=28
+            threads=2
+            keyframe-max-dist=15
+            token-partitions=0
+          ! tee name=t
+          t. ! queue ! appsink name=appsink
+          t. ! queue ! webmmux ! multifilesink
+            location=/storage/neko-recording-%05d.webm
+            next-file=3
   audio:
     enabled: false                   # Completely disable audio streaming
