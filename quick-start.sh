@@ -1,7 +1,7 @@
 #!/bin/bash
 # Startup time measurement and optimization script
 
-echo "🚀 Starting optimized Steel Browser..."
+echo "🚀 Starting optimized Steel Browser with recording..."
 start_time=$(date +%s%N)
 
 # Function to measure time
@@ -51,3 +51,10 @@ if [ ! -z "$response" ]; then
 else
     echo "⚠️  DevTools connection test failed"
 fi
+
+echo ""
+echo "🎥 Recording is enabled! Check recordings with:"
+echo "   ./manage-recordings.sh list"
+echo ""
+echo "📱 Access your browser at: http://localhost:8080"
+echo "🔧 DevTools available at: http://localhost:9222"
