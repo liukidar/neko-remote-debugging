@@ -55,12 +55,6 @@ services:
       NEKO_PASSWORD: ""
       NEKO_PASSWORD_ADMIN: ""
       NEKO_MEMBER_PROVIDER: "anonymous"
-      # Recording pipeline - saves stream to local file while maintaining streaming
-      NEKO_BROADCAST_PIPELINE: >-
-        videoconvert ! 
-        vp8enc target-bitrate=750000 cpu-used=12 deadline=50000 error-resilient=1 lag-in-frames=0 min-quantizer=6 max-quantizer=28 threads=2 keyframe-max-dist=30 ! 
-        webmmux ! 
-        filesink location=/storage/recording-$(date +%Y%m%d-%H%M%S).webm
 
 networks:
   browser-network:
